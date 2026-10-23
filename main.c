@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int target_count(int n, int *sk, int target)
+int target_count(int size, int *sk, int target)
 {
     int count = 0;
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < size; i++)
     {
         if (sk[i] == target)
             count++;
@@ -14,16 +14,16 @@ int target_count(int n, int *sk, int target)
 
 int main()
 {
-    int n;
+    int size;
     printf("Type a natural number: ");
-    if (scanf("%d", &n) != 1 || n <= 0)
+    if (scanf("%d", &size) != 1 || size <= 0)
     {
         printf("\nError: Type a natural number!\n");
         return 1;
     }
 
 
-    int *sk = malloc(n * sizeof *sk);
+    int *sk = malloc(size * sizeof *sk);
     if (sk == NULL)
         return 1;
     else
@@ -31,7 +31,7 @@ int main()
     
 
     printf("Type the numbers: ");
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < size; i++)
     {
         if (scanf("%d", &sk[i]) != 1)
         {
@@ -48,9 +48,12 @@ int main()
     if (scanf("%d", &target) != 1)
     {
         printf("Error: Type a number!\n");
+        free(sk);
         return 1;
     }
-    printf("Number %d repeats %d times\n", target, target_count(n,sk,target));
+    printf("Number %d repeats %d times\n", target, target_count(size,sk,target));
+
+
     free(sk);
     return 0;
 }
